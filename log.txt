@@ -1,0 +1,7 @@
+2024-11-25 07:38:31 - Koneksi berhasil ke database.
+2024-11-25 07:38:42 - Koneksi gagal: Table 'market.t_user' doesn't exist
+Koneksi gagal: Table 'market.t_user' doesn't exist
+Koneksi gagal: Table 'market.t_user' doesn't exist
+Koneksi gagal: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
