@@ -307,7 +307,7 @@ private void koneksi() {
                 btUpdateActionPerformed(evt);
             }
         });
-        jPanel1.add(btUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 70, -1));
+        jPanel1.add(btUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 80, -1));
 
         btHapus.setText("Delete");
         btHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -330,7 +330,7 @@ private void koneksi() {
                 btClearActionPerformed(evt);
             }
         });
-        jPanel1.add(btClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, -1, -1));
+        jPanel1.add(btClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 80, -1));
 
         btEdit.setText("Edit");
         btEdit.addActionListener(new java.awt.event.ActionListener() {
