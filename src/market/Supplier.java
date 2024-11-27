@@ -167,6 +167,12 @@ private void koneksi() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txBarangMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txBarangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txBarangMouseExited(evt);
+            }
         });
         jPanel2.add(txBarang);
         txBarang.setBounds(0, 150, 150, 40);
@@ -582,28 +588,38 @@ private void koneksi() {
 
     private void txHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseExited
         // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
+        txHome.setForeground(Color.BLACK);
     }//GEN-LAST:event_txHomeMouseExited
 
     private void txSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseEntered
         // TODO add your handling code here:
-         txHome.setForeground(Color.BLUE);
+         txSupplier.setForeground(Color.BLUE);
     }//GEN-LAST:event_txSupplierMouseEntered
 
     private void txSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseExited
         // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
+        txSupplier.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSupplierMouseExited
 
     private void txAboutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseEntered
         // TODO add your handling code here:
-         txHome.setForeground(Color.BLUE);
+         txAbout.setForeground(Color.BLUE);
     }//GEN-LAST:event_txAboutMouseEntered
 
     private void txAboutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseExited
         // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
+        txAbout.setForeground(Color.BLACK);
     }//GEN-LAST:event_txAboutMouseExited
+
+    private void txBarangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseEntered
+        // TODO add your handling code here:
+        txBarang.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txBarangMouseEntered
+
+    private void txBarangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseExited
+        // TODO add your handling code here:
+          txBarang.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txBarangMouseExited
                                         
 
     
