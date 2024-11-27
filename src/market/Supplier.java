@@ -4,10 +4,16 @@
  */
 package market;
 
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import javax.swing.table.*;
 import java.text.SimpleDateFormat;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author aflia
@@ -123,6 +129,12 @@ private void koneksi() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txHomeMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txHomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txHomeMouseExited(evt);
+            }
         });
         jPanel2.add(txHome);
         txHome.setBounds(0, 100, 150, 40);
@@ -135,13 +147,20 @@ private void koneksi() {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(20, 90, 110, 10);
 
+        txAbout.setText("                    Tentang");
         txAbout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txAboutMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txAboutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txAboutMouseExited(evt);
+            }
         });
         jPanel2.add(txAbout);
-        txAbout.setBounds(30, 350, 150, 40);
+        txAbout.setBounds(0, 290, 150, 50);
 
         txBarang.setText("                    Data Barang");
         txBarang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,6 +176,12 @@ private void koneksi() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txSupplierMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txSupplierMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txSupplierMouseExited(evt);
+            }
         });
         jPanel2.add(txSupplier);
         txSupplier.setBounds(0, 190, 150, 50);
@@ -165,6 +190,12 @@ private void koneksi() {
         txPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txPenjualanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txPenjualanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txPenjualanMouseExited(evt);
             }
         });
         jPanel2.add(txPenjualan);
@@ -374,7 +405,6 @@ private void koneksi() {
     txNoTelp.setText("");
     txAlamat.setText("");
 }
-
     
     private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
         // TODO add your handling code here:
@@ -535,6 +565,50 @@ private void koneksi() {
     JOptionPane.showMessageDialog(this, "Anda sekarang dapat memilih data dari tabel.");
     }//GEN-LAST:event_btEditActionPerformed
 
+    private void txPenjualanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseEntered
+        // TODO add your handling code here:
+             txPenjualan.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txPenjualanMouseEntered
+
+    private void txPenjualanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseExited
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txPenjualanMouseExited
+
+    private void txHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseEntered
+        // TODO add your handling code here:
+        txHome.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txHomeMouseEntered
+
+    private void txHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseExited
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txHomeMouseExited
+
+    private void txSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseEntered
+        // TODO add your handling code here:
+         txHome.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txSupplierMouseEntered
+
+    private void txSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseExited
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txSupplierMouseExited
+
+    private void txAboutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseEntered
+        // TODO add your handling code here:
+         txHome.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txAboutMouseEntered
+
+    private void txAboutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseExited
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txAboutMouseExited
+                                        
+
+    
+
+    
     /**
      * @param args the command line arguments
      */
@@ -560,23 +634,22 @@ private void koneksi() {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Supplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
