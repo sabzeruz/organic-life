@@ -5,3 +5,4 @@ Koneksi gagal: Table 'market.t_user' doesn't exist
 Koneksi gagal: Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+Koneksi gagal: Access denied for user 'root'@'localhost' (using password: YES)

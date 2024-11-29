@@ -26,7 +26,7 @@ private void koneksi() {
     try {
         String url = "jdbc:mysql://localhost:3306/market"; // Ganti sesuai konfigurasi database
         String user = "root"; // Username database
-        String pass = "1"; // Password database
+        String pass = ""; // Password database
         conn = DriverManager.getConnection(url, user, pass);
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Koneksi ke database gagal: " + e.getMessage());

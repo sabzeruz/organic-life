@@ -26,7 +26,7 @@ public class Config {
             try {
                 String url = "jdbc:mysql://localhost:3306/market";
                 String user = "root";
-                String password = "1";
+                String password = "";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 config = DriverManager.getConnection(url, user, password);
                 System.out.println("Koneksi ke database berhasil.");

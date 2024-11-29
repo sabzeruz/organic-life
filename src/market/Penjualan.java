@@ -4,6 +4,8 @@
  */
 package market;
 
+import java.awt.Color;
+
 /**
  *
  * @author aflia
@@ -26,7 +28,6 @@ public class Penjualan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txHome = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,6 +41,7 @@ public class Penjualan extends javax.swing.JFrame {
         iSupplier = new javax.swing.JLabel();
         iPenjualan = new javax.swing.JLabel();
         iAbout = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,83 +70,120 @@ public class Penjualan extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel2.setBackground(new java.awt.Color(184, 212, 173));
         jPanel2.setLayout(null);
 
+        txHome.setText("                    Home");
         txHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         txHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txHomeMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txHomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txHomeMouseExited(evt);
+            }
         });
         jPanel2.add(txHome);
-        txHome.setBounds(0, 110, 150, 40);
+        txHome.setBounds(0, 100, 150, 40);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.keranjang.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(20, 10, 120, 80);
+        jLabel4.setBounds(20, 10, 130, 80);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/garis0.png"))); // NOI18N
         jPanel2.add(jLabel3);
         jLabel3.setBounds(20, 90, 110, 10);
 
+        txAbout.setText("                    Tentang");
         txAbout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txAboutMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txAboutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txAboutMouseExited(evt);
+            }
         });
         jPanel2.add(txAbout);
-        txAbout.setBounds(0, 270, 150, 40);
+        txAbout.setBounds(0, 290, 150, 50);
 
+        txBarang.setText("                    Data Barang");
         txBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txBarangMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txBarangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txBarangMouseExited(evt);
             }
         });
         jPanel2.add(txBarang);
         txBarang.setBounds(0, 150, 150, 40);
 
+        txSupplier.setText("                    Data Supplier");
         txSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txSupplierMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txSupplierMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txSupplierMouseExited(evt);
+            }
         });
         jPanel2.add(txSupplier);
-        txSupplier.setBounds(0, 190, 150, 40);
+        txSupplier.setBounds(0, 190, 150, 50);
 
+        txPenjualan.setText("                    Data Penjualan");
         txPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txPenjualanMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txPenjualanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txPenjualanMouseExited(evt);
+            }
         });
         jPanel2.add(txPenjualan);
-        txPenjualan.setBounds(0, 230, 150, 40);
+        txPenjualan.setBounds(0, 240, 150, 50);
 
         iHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.Icon1.png"))); // NOI18N
         jPanel2.add(iHome);
-        iHome.setBounds(10, 100, 40, 50);
+        iHome.setBounds(10, 100, 40, 40);
 
+        iBarang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.barang.png"))); // NOI18N
+        iBarang.setAlignmentY(0.0F);
+        iBarang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(iBarang);
-        iBarang.setBounds(0, 130, 50, 70);
+        iBarang.setBounds(4, 140, 50, 50);
 
         iSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.supplier.png"))); // NOI18N
         jPanel2.add(iSupplier);
-        iSupplier.setBounds(0, 180, 50, 60);
+        iSupplier.setBounds(2, 190, 50, 50);
 
         iPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/penjualan.icon1.png"))); // NOI18N
         jPanel2.add(iPenjualan);
-        iPenjualan.setBounds(0, 230, 50, 40);
+        iPenjualan.setBounds(4, 240, 60, 50);
 
         iAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.about1.png"))); // NOI18N
         jPanel2.add(iAbout);
-        iAbout.setBounds(0, 260, 50, 70);
+        iAbout.setBounds(6, 290, 60, 50);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 496));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 496));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel5.setText("Data Penjualan");
@@ -244,33 +283,30 @@ public class Penjualan extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txNamaBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txNamaBarangActionPerformed
+
+    private void txJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txJumlahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txJumlahActionPerformed
+
     private void txHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseClicked
         // TODO add your handling code here:
-        Penjualan home = new Penjualan();
+        Dashboard home = new Dashboard();
         home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_txHomeMouseClicked
 
-    private void txBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseClicked
+    private void txHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseEntered
         // TODO add your handling code here:
-        Barang barang = new Barang();
-        barang.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txBarangMouseClicked
+        txHome.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txHomeMouseEntered
 
-    private void txSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseClicked
+    private void txHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseExited
         // TODO add your handling code here:
-        Supplier supplier = new Supplier();
-        supplier.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txSupplierMouseClicked
-
-    private void txPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseClicked
-        // TODO add your handling code here:
-        Penjualan penjualan = new Penjualan();
-        penjualan.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txPenjualanMouseClicked
+        txHome.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txHomeMouseExited
 
     private void txAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseClicked
         // TODO add your handling code here:
@@ -279,13 +315,66 @@ public class Penjualan extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_txAboutMouseClicked
 
-    private void txNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txNamaBarangActionPerformed
+    private void txAboutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_txNamaBarangActionPerformed
+        txAbout.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txAboutMouseEntered
 
-    private void txJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txJumlahActionPerformed
+    private void txAboutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_txJumlahActionPerformed
+        txAbout.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txAboutMouseExited
+
+    private void txBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseClicked
+        // TODO add your handling code here:
+        Barang barang = new Barang();
+        barang.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_txBarangMouseClicked
+
+    private void txBarangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseEntered
+        // TODO add your handling code here:
+        txBarang.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txBarangMouseEntered
+
+    private void txBarangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txBarangMouseExited
+        // TODO add your handling code here:
+        txBarang.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txBarangMouseExited
+
+    private void txSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseClicked
+        // TODO add your handling code here:
+        Supplier supplier = new Supplier();
+        supplier.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_txSupplierMouseClicked
+
+    private void txSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseEntered
+        // TODO add your handling code here:
+        txSupplier.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txSupplierMouseEntered
+
+    private void txSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseExited
+        // TODO add your handling code here:
+        txSupplier.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txSupplierMouseExited
+
+    private void txPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseClicked
+        // TODO add your handling code here:
+        Penjualan penjualan = new Penjualan();
+        penjualan.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_txPenjualanMouseClicked
+
+    private void txPenjualanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseEntered
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLUE);
+    }//GEN-LAST:event_txPenjualanMouseEntered
+
+    private void txPenjualanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseExited
+        // TODO add your handling code here:
+        txPenjualan.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txPenjualanMouseExited
 
     /**
      * @param args the command line arguments
