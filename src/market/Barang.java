@@ -8,69 +8,88 @@ import java.awt.Color;
 import java.sql.*;
 import javax.swing.table.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
+
+
 /**
  *
  * @author aflia
  */
 public class Barang extends javax.swing.JFrame {
-private Connection conn;
-private boolean isUpdateEnabled = false;
 
-private void koneksi() {
-    try {
-        String url = "jdbc:mysql://localhost:3306/market"; // Ganti sesuai konfigurasi database
-        String user = "root"; // Username database
-        String pass = ""; // Password database
-        conn = DriverManager.getConnection(url, user, pass);
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Koneksi ke database gagal: " + e.getMessage());
+    private Connection conn;
+    private boolean isUpdateEnabled = false;
+
+    private void koneksi() {
+        try {
+            String url = "jdbc:mysql://localhost:3306/market"; // Ganti sesuai konfigurasi database
+            String user = "root"; // Username database
+            String pass = ""; // Password database
+            conn = DriverManager.getConnection(url, user, pass);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Koneksi ke database gagal: " + e.getMessage());
+        }
     }
-}
 
+    
+    
     /**
      * Creates new form About
      */
     public Barang() {
         initComponents();
         koneksi();
-    loadData();
+        loadData();
+        loadSupplierNames();
+        
+        //Mengatur Logo Icon
+        ImageIcon appIcon = new ImageIcon("src/image/iconMarket..png");
+        this.setIconImage(appIcon.getImage());
+        // Mengatur judul jendela
+        this.setTitle("Organic Life");
     }
-    
+
     private void loadData() {
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("Kode Barang");
-    model.addColumn("Nama Barang");
-    model.addColumn("Harga Modal");
-    model.addColumn("Harga Jual");
-    model.addColumn("Kategori");
-    model.addColumn("Waktu Pembelian");
-    model.addColumn("Jumlah");
-    model.addColumn("Satuan");
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode Barang");
+        model.addColumn("Nama Barang");
+        model.addColumn("Harga Modal");
+        model.addColumn("Harga Jual");
+        model.addColumn("Waktu Pembelian");
+        model.addColumn("Kategori");
+        model.addColumn("supplier");
+        model.addColumn("Jumlah");
+        model.addColumn("Satuan");
 
-    try {
-        String query = "SELECT * FROM t_barang";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        try {
+            String query = "SELECT * FROM t_barang";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getString("kode_barang"),
-                rs.getString("nama_barang"),
-                rs.getInt("harga_modal"),
-                rs.getInt("harga_jual"),
-                rs.getString("kategori"),
-                rs.getString("waktu_pembelian"),
-                rs.getInt("jumlah"),
-                rs.getString("satuan")
-            });
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("kode_barang"),
+                    rs.getString("nama_barang"),
+                    rs.getInt("harga_modal"),
+                    rs.getInt("harga_jual"),
+                    rs.getString("waktu_pembelian"),
+                    rs.getString("kategori"),
+                    rs.getString("nama_supplier"),
+                    rs.getInt("jumlah"),
+                    rs.getString("satuan")
+                });
+            }
+
+            jTable1.setModel(model);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
         }
-
-        jTable1.setModel(model);
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,11 +108,9 @@ private void koneksi() {
         txAbout = new javax.swing.JLabel();
         txBarang = new javax.swing.JLabel();
         txSupplier = new javax.swing.JLabel();
-        txPenjualan = new javax.swing.JLabel();
         iHome = new javax.swing.JLabel();
         iBarang = new javax.swing.JLabel();
         iSupplier = new javax.swing.JLabel();
-        iPenjualan = new javax.swing.JLabel();
         iAbout = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,7 +138,7 @@ private void koneksi() {
         btEdit = new javax.swing.JButton();
         txWaktuBeli = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbSupplier = new javax.swing.JComboBox<>();
         latar = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
@@ -171,7 +188,7 @@ private void koneksi() {
             }
         });
         jPanel2.add(txAbout);
-        txAbout.setBounds(0, 290, 150, 50);
+        txAbout.setBounds(0, 240, 150, 50);
 
         txBarang.setText("                    Data Barang");
         txBarang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,21 +220,6 @@ private void koneksi() {
         jPanel2.add(txSupplier);
         txSupplier.setBounds(0, 190, 150, 50);
 
-        txPenjualan.setText("                    Data Penjualan");
-        txPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseExited(evt);
-            }
-        });
-        jPanel2.add(txPenjualan);
-        txPenjualan.setBounds(0, 240, 150, 50);
-
         iHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.Icon1.png"))); // NOI18N
         jPanel2.add(iHome);
         iHome.setBounds(10, 100, 40, 40);
@@ -233,13 +235,9 @@ private void koneksi() {
         jPanel2.add(iSupplier);
         iSupplier.setBounds(2, 190, 50, 50);
 
-        iPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/penjualan.icon1.png"))); // NOI18N
-        jPanel2.add(iPenjualan);
-        iPenjualan.setBounds(4, 240, 60, 50);
-
         iAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.about1.png"))); // NOI18N
         jPanel2.add(iAbout);
-        iAbout.setBounds(6, 290, 60, 50);
+        iAbout.setBounds(5, 240, 60, 50);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 496));
 
@@ -384,8 +382,8 @@ private void koneksi() {
         jLabel12.setText("Waktu Pembelian:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 262, 250, 30));
+        cbSupplier.setModel(cbSupplier.getModel());
+        jPanel1.add(cbSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 262, 250, 30));
 
         latar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/latarbelakang1.png"))); // NOI18N
         jPanel1.add(latar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 750, 520));
@@ -399,6 +397,36 @@ private void koneksi() {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+// Pastikan metode ini mengisi model JComboBox dengan data
+    private void loadSupplierNames() {
+    List<String> supplierNames = getSupplierNames(); // Ambil data nama supplier
+    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+    for (String name : supplierNames) {
+        model.addElement(name); // Tambahkan nama supplier ke model
+    }
+    cbSupplier.setModel(model); // Set model untuk cbSupplier
+}
+
+
+    // Metode untuk mengambil nama supplier dari tabel t_supplier
+    private List<String> getSupplierNames() {
+        List<String> suppliers = new ArrayList<>();
+        String query = "SELECT nama_supplier FROM t_supplier";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                suppliers.add(rs.getString("nama_supplier"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal mengambil data supplier: " + e.getMessage());
+        }
+        return suppliers;
+    }
+   
+
+   
+    
     private void txHrgModalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txHrgModalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txHrgModalActionPerformed
@@ -418,165 +446,172 @@ private void koneksi() {
         int hargaModal = Integer.parseInt(txHrgModal.getText());
         int hargaJual = Integer.parseInt(txHrgJual.getText());
         String kategori = cbKategori.getSelectedItem().toString();
+        String supplier = cbSupplier.getSelectedItem().toString();
         String waktu = txWaktuBeli.getText();
         int jumlah = Integer.parseInt(txJumlah.getText());
         String satuan = cbSatuan.getSelectedItem().toString();
 
-    try {
-        String query = "INSERT INTO t_barang (kode_barang, nama_barang, harga_modal, harga_jual, kategori, waktu_pembelian, jumlah, satuan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setString(1, kode);
-        pst.setString(2, nama);
-        pst.setInt(3, hargaModal);
-        pst.setInt(4, hargaJual);
-        pst.setString(5, kategori);
-        pst.setString(6, waktu);
-        pst.setInt(7, jumlah);
-        pst.setString(8, satuan);
-        pst.executeUpdate();
+        try {
+            String query = "INSERT INTO t_barang (kode_barang, nama_barang, harga_modal, harga_jual, waktu_pembelian, kategori, nama_supplier, jumlah, satuan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, kode);
+            pst.setString(2, nama);
+            pst.setInt(3, hargaModal);
+            pst.setInt(4, hargaJual);
+            pst.setString(5, waktu);
+             pst.setString(6, kategori);
+            pst.setString(7, supplier);
+            pst.setInt(8, jumlah);
+            pst.setString(9, satuan);
+            pst.executeUpdate();
 
-        JOptionPane.showMessageDialog(this, "Data berhasil disimpan.");
-        loadData(); // Perbarui tabel setelah input
-        clearForm(); // Hapus isi form
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
-    }
+            JOptionPane.showMessageDialog(this, "Data berhasil disimpan.");
+            loadData(); // Perbarui tabel setelah input
+            clearForm(); // Hapus isi form
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
+        }
 
     }//GEN-LAST:event_btInputActionPerformed
-        private void clearForm() {
-    txKodeBarang.setText("");
-    txNamaBarang.setText("");
-    txHrgModal.setText("");
-    txHrgJual.setText("");
-    cbKategori.setSelectedIndex(0);
-    txWaktuBeli.setText("");
-    txJumlah.setText("");
-    cbSatuan.setSelectedIndex(0);
-}
+    private void clearForm() {
+        txKodeBarang.setText("");
+        txNamaBarang.setText("");
+        txHrgModal.setText("");
+        txHrgJual.setText("");
+        cbKategori.setSelectedIndex(0);
+        cbSupplier.setSelectedIndex(0);
+        txWaktuBeli.setText("");
+        txJumlah.setText("");
+        cbSatuan.setSelectedIndex(0);
+    }
 
     private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
         // TODO add your handling code here:
-        if (txKodeBarang.getText().isEmpty() || 
-        txNamaBarang.getText().isEmpty() || 
-        txHrgModal.getText().isEmpty() || 
-        txHrgJual.getText().isEmpty() || 
-        txJumlah.getText().isEmpty() || 
-        txWaktuBeli.getText().isEmpty()) {
-        
-        JOptionPane.showMessageDialog(this, "Semua field harus diisi.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    try {
-        String kode = txKodeBarang.getText();
-        String nama = txNamaBarang.getText();
-        int hargaModal = Integer.parseInt(txHrgModal.getText());
-        int hargaJual = Integer.parseInt(txHrgJual.getText());
-        String kategori = cbKategori.getSelectedItem().toString();
-        String waktu = txWaktuBeli.getText();
-        int jumlah = Integer.parseInt(txJumlah.getText());
-        String satuan = cbSatuan.getSelectedItem().toString();
-        
-        // Execute the update query
-        String query = "UPDATE t_barang SET nama_barang = ?, harga_modal = ?, harga_jual = ?, kategori = ?, waktu_pembelian = ?, jumlah = ?, satuan = ? WHERE kode_barang = ?";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setString(1, nama);
-        pst.setInt(2, hargaModal);
-        pst.setInt(3, hargaJual);
-        pst.setString(4, kategori);
-        pst.setString(5, waktu);
-        pst.setInt(6, jumlah);
-        pst.setString(7, satuan);
-        pst.setString(8, kode);
-        pst.executeUpdate();
+        if (txKodeBarang.getText().isEmpty()
+                || txNamaBarang.getText().isEmpty()
+                || txHrgModal.getText().isEmpty()
+                || txHrgJual.getText().isEmpty()
+                || txJumlah.getText().isEmpty()
+                || txWaktuBeli.getText().isEmpty()
+                ) {
 
-        JOptionPane.showMessageDialog(this, "Data berhasil diperbarui.");
-        loadData();
-        clearForm();
-        isUpdateEnabled = false; // Reset update status
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid untuk harga dan jumlah.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Gagal memperbarui data: " + e.getMessage());
-    }
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            String kode = txKodeBarang.getText();
+            String nama = txNamaBarang.getText();
+            int hargaModal = Integer.parseInt(txHrgModal.getText());
+            int hargaJual = Integer.parseInt(txHrgJual.getText());
+            String kategori = cbKategori.getSelectedItem().toString();
+            String supplier = cbSupplier.getSelectedItem().toString();
+            String waktu = txWaktuBeli.getText();
+            int jumlah = Integer.parseInt(txJumlah.getText());
+            String satuan = cbSatuan.getSelectedItem().toString();
+
+            // Execute the update query
+            String query = "UPDATE t_barang SET nama_barang = ?, harga_modal = ?, harga_jual = ?, kategori = ?, nama_supplier = ?, waktu_pembelian = ?, jumlah = ?, satuan = ? WHERE kode_barang = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, nama);
+            pst.setInt(2, hargaModal);
+            pst.setInt(3, hargaJual);
+            pst.setString(4, kategori);
+            pst.setString(5, supplier);
+            pst.setString(6, waktu);
+            pst.setInt(7, jumlah);
+            pst.setString(8, satuan);
+            pst.setString(9, kode);
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Data berhasil diperbarui.");
+            loadData();
+            clearForm();
+            isUpdateEnabled = false; // Reset update status
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid untuk harga dan jumlah.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memperbarui data: " + e.getMessage());
+        }
     }//GEN-LAST:event_btUpdateActionPerformed
 
     private void btCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCariActionPerformed
         // TODO add your handling code here:
         String keyword = txCari.getText().trim();
 
-    if (keyword != null && !keyword.isEmpty()) {
-        try {
-            // Kueri SQL untuk mencari data berdasarkan kode_barang, nama_barang, atau kategori
-            String query = "SELECT * FROM t_barang WHERE kode_barang LIKE ? OR nama_barang LIKE ? OR kategori LIKE ?";
-            PreparedStatement pst = conn.prepareStatement(query);
+        if (keyword != null && !keyword.isEmpty()) {
+            try {
+                // Kueri SQL untuk mencari data berdasarkan kode_barang, nama_barang, atau kategori
+                String query = "SELECT * FROM t_barang WHERE kode_barang LIKE ? OR nama_barang LIKE ? OR kategori LIKE ?";
+                PreparedStatement pst = conn.prepareStatement(query);
 
-            // Mengisi parameter kueri dengan keyword
-            pst.setString(1, "%" + keyword + "%");
-            pst.setString(2, "%" + keyword + "%");
-            pst.setString(3, "%" + keyword + "%");
+                // Mengisi parameter kueri dengan keyword
+                pst.setString(1, "%" + keyword + "%");
+                pst.setString(2, "%" + keyword + "%");
+                pst.setString(3, "%" + keyword + "%");
 
-            ResultSet rs = pst.executeQuery();
+                ResultSet rs = pst.executeQuery();
 
-            // Memuat hasil pencarian ke dalam tabel
-            loadData(rs);
+                // Memuat hasil pencarian ke dalam tabel
+                loadData(rs);
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Gagal mencari data: " + e.getMessage());
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Gagal mencari data: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Silakan masukkan kata kunci untuk pencarian.");
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Silakan masukkan kata kunci untuk pencarian.");
-    }
     }//GEN-LAST:event_btCariActionPerformed
 
     private void loadData(ResultSet rs) {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Clear existing data
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear existing data
 
-    try {
-        while (rs.next()) {
-            Object[] row = new Object[]{
-                rs.getString("kode_barang"),
-                rs.getString("nama_barang"),
-                rs.getDouble("harga_modal"),
-                rs.getDouble("harga_jual"),
-                rs.getString("kategori"),
-                rs.getString("waktu_pembelian"),
-                rs.getInt("jumlah"),
-                rs.getString("satuan")
-            };
-            model.addRow(row);
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[]{
+                    rs.getString("kode_barang"),
+                    rs.getString("nama_barang"),
+                    rs.getDouble("harga_modal"),
+                    rs.getDouble("harga_jual"),
+                    rs.getString("kategori"),
+                    rs.getString("nama_supplier"),
+                    rs.getString("waktu_pembelian"),
+                    rs.getInt("jumlah"),
+                    rs.getString("satuan")
+                };
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
     }
-}
 
-    
+
     private void btHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHapusActionPerformed
         // TODO add your handling code here:
         String kode = txKodeBarang.getText();
 
-    if (kode.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Kode barang tidak boleh kosong.");
-        return;
-    }
-
-    int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
-    if (confirm == JOptionPane.YES_OPTION) {
-        try {
-            String query = "DELETE FROM t_barang WHERE kode_barang = ?";
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, kode);
-            pst.executeUpdate();
-
-            JOptionPane.showMessageDialog(this, "Data berhasil dihapus.");
-            loadData();
-            clearForm();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
+        if (kode.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Kode barang tidak boleh kosong.");
+            return;
         }
-    }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                String query = "DELETE FROM t_barang WHERE kode_barang = ?";
+                PreparedStatement pst = conn.prepareStatement(query);
+                pst.setString(1, kode);
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Data berhasil dihapus.");
+                loadData();
+                clearForm();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btHapusActionPerformed
 
     private void txCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txCariActionPerformed
@@ -584,56 +619,71 @@ private void koneksi() {
     }//GEN-LAST:event_txCariActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        if (!isUpdateEnabled) {
+       if (!isUpdateEnabled) {
         JOptionPane.showMessageDialog(this, "Klik tombol Edit terlebih dahulu untuk memilih data.");
         return; // Hentikan proses lebih lanjut
     }
-        
-        int selectedRow = jTable1.getSelectedRow();
+
+    int selectedRow = jTable1.getSelectedRow();
     if (selectedRow != -1) {
         // Retrieve data from the selected row
         String kode = jTable1.getValueAt(selectedRow, 0).toString();
         String nama = jTable1.getValueAt(selectedRow, 1).toString();
         String hargaModal = jTable1.getValueAt(selectedRow, 2).toString();
         String hargaJual = jTable1.getValueAt(selectedRow, 3).toString();
-        String kategori = jTable1.getValueAt(selectedRow, 4).toString();
-        String waktu = jTable1.getValueAt(selectedRow, 5).toString();
-        String jumlah = jTable1.getValueAt(selectedRow, 6).toString();
-        String satuan = jTable1.getValueAt(selectedRow, 7).toString();
-        
+        String waktu = jTable1.getValueAt(selectedRow, 4).toString();
+        String kategori = jTable1.getValueAt(selectedRow, 5).toString();
+        String supplier = jTable1.getValueAt(selectedRow, 6).toString();
+        String jumlah = jTable1.getValueAt(selectedRow, 7).toString();
+        String satuan = jTable1.getValueAt(selectedRow, 8).toString();
+
         // Populate form fields with the selected row's data
         txKodeBarang.setText(kode);
         txNamaBarang.setText(nama);
         txHrgModal.setText(hargaModal);
         txHrgJual.setText(hargaJual);
-        cbKategori.setSelectedItem(kategori);
         txWaktuBeli.setText(waktu);
+        cbKategori.setSelectedItem(kategori);
+        cbSupplier.setSelectedItem(supplier);
         txJumlah.setText(jumlah);
-        cbSatuan.setSelectedItem(satuan);
+        cbSatuan.setSelectedItem(satuan);  // Tampilkan waktu pembelian
+
+        // Set the selected supplier in cbSupplier ComboBox
+        setSupplierComboBox(supplier);
     }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void setSupplierComboBox(String supplierName) {
+    // Cek apakah supplierName ada di dalam cbSupplier
+    for (int i = 0; i < cbSupplier.getItemCount(); i++) {
+        if (cbSupplier.getItemAt(i).equals(supplierName)) {
+            cbSupplier.setSelectedIndex(i);  // Set supplier yang dipilih berdasarkan nama
+            break;
+        }
+    }
+}
+    
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         // TODO add your handling code here:
-    txKodeBarang.setText("");
-    txNamaBarang.setText("");
-    txHrgModal.setText("");
-    txHrgJual.setText("");
-    cbKategori.setSelectedIndex(0);
-    txWaktuBeli.setText("");
-    txJumlah.setText("");
-    cbSatuan.setSelectedIndex(0);
+        txKodeBarang.setText("");
+        txNamaBarang.setText("");
+        txHrgModal.setText("");
+        txHrgJual.setText("");
+        cbKategori.setSelectedIndex(0);
+        cbSupplier.setSelectedIndex(0);
+        txWaktuBeli.setText("");
+        txJumlah.setText("");
+        cbSatuan.setSelectedIndex(0);
 
-    // Jika ada komponen lain seperti combo box, reset nilainya
-    // comboBoxKategori.setSelectedIndex(0); // Contoh jika ada combo box
-    
+        // Jika ada komponen lain seperti combo box, reset nilainya
+        // comboBoxKategori.setSelectedIndex(0); // Contoh jika ada combo box
+
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
         // TODO add your handling code here:
         isUpdateEnabled = true;
-    JOptionPane.showMessageDialog(this, "Anda sekarang dapat memilih data dari tabel.");
+        JOptionPane.showMessageDialog(this, "Anda sekarang dapat memilih data dari tabel.");
     }//GEN-LAST:event_btEditActionPerformed
 
     private void txHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseClicked
@@ -704,23 +754,6 @@ private void koneksi() {
         txSupplier.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSupplierMouseExited
 
-    private void txPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseClicked
-        // TODO add your handling code here:
-        Penjualan penjualan = new Penjualan();
-        penjualan.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txPenjualanMouseClicked
-
-    private void txPenjualanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseEntered
-        // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLUE);
-    }//GEN-LAST:event_txPenjualanMouseEntered
-
-    private void txPenjualanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseExited
-        // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txPenjualanMouseExited
-
     /**
      * @param args the command line arguments
      */
@@ -781,12 +814,11 @@ private void koneksi() {
     private javax.swing.JButton btUpdate;
     private javax.swing.JComboBox<String> cbKategori;
     private javax.swing.JComboBox<String> cbSatuan;
+    private javax.swing.JComboBox<String> cbSupplier;
     private javax.swing.JLabel iAbout;
     private javax.swing.JLabel iBarang;
     private javax.swing.JLabel iHome;
-    private javax.swing.JLabel iPenjualan;
     private javax.swing.JLabel iSupplier;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -812,7 +844,6 @@ private void koneksi() {
     private javax.swing.JTextField txJumlah;
     private javax.swing.JTextField txKodeBarang;
     private javax.swing.JTextField txNamaBarang;
-    private javax.swing.JLabel txPenjualan;
     private javax.swing.JLabel txSupplier;
     private javax.swing.JTextField txWaktuBeli;
     // End of variables declaration//GEN-END:variables
