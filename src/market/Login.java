@@ -4,6 +4,8 @@
  */
 package market;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import market.Config;
 import static market.Config.writeLog;
@@ -20,6 +22,11 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        ImageIcon appIcon = new ImageIcon("src/image/iconMarket..png");
+        this.setIconImage(appIcon.getImage());
+        
+        // Mengatur judul jendela
+        this.setTitle("Organic Life");
     }
 
     /**
@@ -160,6 +167,9 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+         
+
+      
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

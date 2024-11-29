@@ -4,12 +4,15 @@
  */
 package market;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 import javax.swing.table.*;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +23,7 @@ import javax.swing.JPanel;
  */
 public class Supplier extends javax.swing.JFrame {
 private Connection conn;
+private JLabel halamanAktif;
 private boolean isUpdateEnabled = false;
 
 private void koneksi() {
@@ -32,14 +36,26 @@ private void koneksi() {
         JOptionPane.showMessageDialog(this, "Koneksi ke database gagal: " + e.getMessage());
     }
 }
+
+
+
     /**
      * Creates new form About
      */
     public Supplier() {
-        initComponents();
-        koneksi();
+    initComponents();
+    koneksi();
     loadData();
+    
+     //Mengatur Logo Icon
+     ImageIcon appIcon = new ImageIcon("src/image/iconMarket..png");
+     this.setIconImage(appIcon.getImage());
+     // Mengatur judul jendela
+     this.setTitle("Organic Life");
     }
+    
+    
+
     
     private void loadData() {
     DefaultTableModel model = new DefaultTableModel();
@@ -68,6 +84,7 @@ private void koneksi() {
     }
 }
 
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,11 +103,9 @@ private void koneksi() {
         txAbout = new javax.swing.JLabel();
         txBarang = new javax.swing.JLabel();
         txSupplier = new javax.swing.JLabel();
-        txPenjualan = new javax.swing.JLabel();
         iHome = new javax.swing.JLabel();
         iBarang = new javax.swing.JLabel();
         iSupplier = new javax.swing.JLabel();
-        iPenjualan = new javax.swing.JLabel();
         iAbout = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -160,7 +175,7 @@ private void koneksi() {
             }
         });
         jPanel2.add(txAbout);
-        txAbout.setBounds(0, 290, 150, 50);
+        txAbout.setBounds(0, 240, 150, 50);
 
         txBarang.setText("                    Data Barang");
         txBarang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,21 +207,6 @@ private void koneksi() {
         jPanel2.add(txSupplier);
         txSupplier.setBounds(0, 190, 150, 50);
 
-        txPenjualan.setText("                    Data Penjualan");
-        txPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseExited(evt);
-            }
-        });
-        jPanel2.add(txPenjualan);
-        txPenjualan.setBounds(0, 240, 150, 50);
-
         iHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.Icon1.png"))); // NOI18N
         jPanel2.add(iHome);
         iHome.setBounds(10, 100, 40, 40);
@@ -222,13 +222,9 @@ private void koneksi() {
         jPanel2.add(iSupplier);
         iSupplier.setBounds(2, 190, 50, 50);
 
-        iPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/penjualan.icon1.png"))); // NOI18N
-        jPanel2.add(iPenjualan);
-        iPenjualan.setBounds(4, 240, 60, 50);
-
         iAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.about1.png"))); // NOI18N
         jPanel2.add(iAbout);
-        iAbout.setBounds(6, 290, 60, 50);
+        iAbout.setBounds(5, 240, 60, 50);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 496));
 
@@ -346,6 +342,8 @@ private void koneksi() {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void txHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseClicked
         // TODO add your handling code here:
         Dashboard home = new Dashboard();
@@ -362,17 +360,11 @@ private void koneksi() {
 
     private void txSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txSupplierMouseClicked
         // TODO add your handling code here:
+       
         Supplier supplier = new Supplier();
         supplier.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_txSupplierMouseClicked
-
-    private void txPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseClicked
-        // TODO add your handling code here:
-        Penjualan penjualan = new Penjualan();
-        penjualan.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txPenjualanMouseClicked
 
     private void txAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txAboutMouseClicked
         // TODO add your handling code here:
@@ -571,16 +563,6 @@ private void koneksi() {
     JOptionPane.showMessageDialog(this, "Anda sekarang dapat memilih data dari tabel.");
     }//GEN-LAST:event_btEditActionPerformed
 
-    private void txPenjualanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseEntered
-        // TODO add your handling code here:
-             txPenjualan.setForeground(Color.BLUE);
-    }//GEN-LAST:event_txPenjualanMouseEntered
-
-    private void txPenjualanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseExited
-        // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txPenjualanMouseExited
-
     private void txHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txHomeMouseEntered
         // TODO add your handling code here:
         txHome.setForeground(Color.BLUE);
@@ -685,7 +667,6 @@ private void koneksi() {
     private javax.swing.JLabel iAbout;
     private javax.swing.JLabel iBarang;
     private javax.swing.JLabel iHome;
-    private javax.swing.JLabel iPenjualan;
     private javax.swing.JLabel iSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -708,7 +689,6 @@ private void koneksi() {
     private javax.swing.JTextField txKode_Supplier;
     private javax.swing.JTextField txNama_Supplier;
     private javax.swing.JTextField txNoTelp;
-    private javax.swing.JLabel txPenjualan;
     private javax.swing.JLabel txSupplier;
     // End of variables declaration//GEN-END:variables
 }

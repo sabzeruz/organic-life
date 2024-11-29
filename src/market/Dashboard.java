@@ -5,6 +5,7 @@
 package market;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +18,12 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+        
+        //Mengatur Logo Icon
+        ImageIcon appIcon = new ImageIcon("src/image/iconMarket..png");
+        this.setIconImage(appIcon.getImage());
+        // Mengatur judul jendela
+        this.setTitle("Organic Life");
     }
 
     /**
@@ -37,11 +44,9 @@ public class Dashboard extends javax.swing.JFrame {
         txAbout = new javax.swing.JLabel();
         txBarang = new javax.swing.JLabel();
         txSupplier = new javax.swing.JLabel();
-        txPenjualan = new javax.swing.JLabel();
         iHome = new javax.swing.JLabel();
         iBarang = new javax.swing.JLabel();
         iSupplier = new javax.swing.JLabel();
-        iPenjualan = new javax.swing.JLabel();
         iAbout = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -95,7 +100,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txAbout);
-        txAbout.setBounds(0, 290, 150, 50);
+        txAbout.setBounds(0, 240, 150, 50);
 
         txBarang.setText("                    Data Barang");
         txBarang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,21 +132,6 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2.add(txSupplier);
         txSupplier.setBounds(0, 190, 150, 50);
 
-        txPenjualan.setText("                    Data Penjualan");
-        txPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txPenjualanMouseExited(evt);
-            }
-        });
-        jPanel2.add(txPenjualan);
-        txPenjualan.setBounds(0, 240, 150, 50);
-
         iHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.Icon1.png"))); // NOI18N
         jPanel2.add(iHome);
         iHome.setBounds(10, 100, 40, 40);
@@ -157,13 +147,9 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2.add(iSupplier);
         iSupplier.setBounds(2, 190, 50, 50);
 
-        iPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/penjualan.icon1.png"))); // NOI18N
-        jPanel2.add(iPenjualan);
-        iPenjualan.setBounds(4, 240, 60, 50);
-
         iAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon.about1.png"))); // NOI18N
         jPanel2.add(iAbout);
-        iAbout.setBounds(6, 290, 60, 50);
+        iAbout.setBounds(5, 240, 60, 50);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 496));
 
@@ -250,23 +236,6 @@ public class Dashboard extends javax.swing.JFrame {
         txSupplier.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSupplierMouseExited
 
-    private void txPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseClicked
-        // TODO add your handling code here:
-        Penjualan penjualan = new Penjualan();
-        penjualan.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_txPenjualanMouseClicked
-
-    private void txPenjualanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseEntered
-        // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLUE);
-    }//GEN-LAST:event_txPenjualanMouseEntered
-
-    private void txPenjualanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txPenjualanMouseExited
-        // TODO add your handling code here:
-        txPenjualan.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txPenjualanMouseExited
-
     /**
      * @param args the command line arguments
      */
@@ -314,7 +283,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel iAbout;
     private javax.swing.JLabel iBarang;
     private javax.swing.JLabel iHome;
-    private javax.swing.JLabel iPenjualan;
     private javax.swing.JLabel iSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -326,7 +294,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel txAbout;
     private javax.swing.JLabel txBarang;
     private javax.swing.JLabel txHome;
-    private javax.swing.JLabel txPenjualan;
     private javax.swing.JLabel txSupplier;
     // End of variables declaration//GEN-END:variables
 }

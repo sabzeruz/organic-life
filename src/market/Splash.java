@@ -6,6 +6,8 @@ package market;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -55,13 +57,13 @@ public class Splash extends javax.swing.JFrame {
         organiclife.setForeground(new java.awt.Color(60, 94, 47));
         organiclife.setText("Organic Life");
         jPanel1.add(organiclife);
-        organiclife.setBounds(140, 140, 120, 30);
+        organiclife.setBounds(140, 140, 121, 30);
 
         load.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         load.setForeground(new java.awt.Color(66, 107, 77));
         load.setText("36%");
         jPanel1.add(load);
-        load.setBounds(190, 200, 30, 20);
+        load.setBounds(50, 210, 30, 20);
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/iconMarket..png"))); // NOI18N
         jPanel1.add(icon);
@@ -71,7 +73,7 @@ public class Splash extends javax.swing.JFrame {
         menunggu.setForeground(new java.awt.Color(66, 107, 77));
         menunggu.setText("Mohon Tunggu....");
         jPanel1.add(menunggu);
-        menunggu.setBounds(160, 260, 120, 18);
+        menunggu.setBounds(260, 210, 100, 18);
 
         background.setForeground(new java.awt.Color(255, 255, 255));
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/360_F_135628942_wAZhAFbDfQpTI533KoCSG3Vq9YfuSA8F[1].jpg"))); // NOI18N
@@ -89,6 +91,8 @@ public class Splash extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+      
     // Membuat instance splash screen
     Splash splash = new Splash();
     splash.setVisible(true); // Tampilkan splash screen
